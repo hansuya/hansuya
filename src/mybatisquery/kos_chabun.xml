@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="a.b.c.com.common.chabun.dao.KosChabunDAO">
+
+<select id="getKosMemberChabun" resultType="kosmembervo">
+	SELECT  /*+ INDEX_DESC(A SYS_C0011206) */ NVL(MAX(SUBSTR(A.MNUM, -4)), 0) + 1  MNUM FROM SPRING_MEMBER A
+</select>
+
+<select id="getKosBoardChabun" resultType="kosboardvo">
+	SELECT  /*+ INDEX_DESC(A SYS_C0011210) */ NVL(MAX(SUBSTR(A.BNUM, -4)), 0) + 1  BNUM FROM SPRING_BOARD A
+</select>
+
+</mapper>         	  

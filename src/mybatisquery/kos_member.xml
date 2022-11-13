@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="a.b.c.com.kos.mem.dao.KosMemberDAO">
+
+<insert id="kosMemberInsert" parameterType="kosmembervo" >
+
+	INSERT INTO SPRING_MEMBER( 	MNUM, MNAME, MID,
+	                          	MPW, MGENDER, MBIRTH,
+		                       	MHP, MTEL, MEMAIL,		                       
+		                        MZONECODE, MROADADDR, MROADDETAIL,
+		                        MJIBUNADDR, MHOBBY, MINFO,
+		                        MPHOTO, DELETEYN, INSERTDATE,
+		                        UPDATEDATE) 
+	                  VALUES( 	#{mnum, jdbcType=VARCHAR}, #{mname, jdbcType=VARCHAR}, #{mid, jdbcType=VARCHAR},
+	                          	#{mpw, jdbcType=VARCHAR}, #{mgender, jdbcType=VARCHAR}, #{mbirth, jdbcType=VARCHAR},
+	                          	#{mhp, jdbcType=VARCHAR}, #{mtel, jdbcType=VARCHAR}, #{memail, jdbcType=VARCHAR},	                          	
+	                          	#{mzonecode, jdbcType=VARCHAR}, #{mroadaddr, jdbcType=VARCHAR}, #{mroaddetail, jdbcType=VARCHAR},
+	                          	#{mjibunaddr, jdbcType=VARCHAR}, #{mhobby, jdbcType=VARCHAR}, #{minfo, jdbcType=VARCHAR},
+	                          	#{mphoto, jdbcType=VARCHAR}, 'Y', SYSDATE,
+	                          	SYSDATE)
+</insert>
+
+<select id="kosMemberSelectAll" parameterType="kosmembervo" resultType="kosmembervo">
+	SELECT 	
+			 A.MNUM 				MNUM
+		   	,A.MNAME 				MNAME
+		   	,A.MID 					MID
+		   	,A.MPW 					MPW
+		   	,A.MGENDER 				MGENDER
+		   	,A.MBIRTH 				MBIRTH
+		   	,A.MHP 					MHP
+		   	,A.MTEL 				MTEL
+		   	,A.MEMAIL 				MEMAIL
+		   	,A.MZONECODE 			MZONECODE
+		   	,A.MROADADDR 			MROADADDR
+		   	,A.MROADDETAIL 			MROADDETAIL
+		   	,A.MJIBUNADDR 			MJIBUNADDR
+		   	,A.MHOBBY 				MHOBBY
+		   	,A.MINFO 				MINFO
+		   	,A.MPHOTO 				MPHOTO
+		   	,A.DELETEYN 			DELETEYN		   	
+		    ,TO_CHAR(TO_DATE(A.INSERTDATE), 'YYYY-MM-DD') 	INSERTDATE 
+		    ,TO_CHAR(TO_DATE(A.UPDATEDATE), 'YYYY-MM-DD') 	UPDATEDATE	
+	FROM 	 SPRING_MEMBER A
+	WHERE 	 A.DELETEYN = 'Y' 
+	<if test="searchFilter=='key2'">
+		<![CDATA[AND A.MNUM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+	</if>
+	<if test="searchFilter=='key3'">
+		<![CDATA[AND A.MNAME LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>		
+	</if>
+	<if test="searchFilter=='key4'">
+		<![CDATA[AND A.MID LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
+	</if>
+	<if test="startDate!=null and startDate!='' and endDate!=null and endDate!=''">
+		<![CDATA[AND TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startDate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+		<![CDATA[AND TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{endDate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+	</if>
+	ORDER BY 1		
+</select>
+
+<select id="kosMemberSelect" parameterType="kosmembervo" resultType="kosmembervo">
+	SELECT 	
+			 A.MNUM 				MNUM
+		   	,A.MNAME 				MNAME
+		   	,A.MID 					MID
+		   	,A.MPW 					MPW
+		   	,A.MGENDER 				MGENDER
+		   	,A.MBIRTH 				MBIRTH
+		   	,A.MHP 					MHP
+		   	,A.MTEL 				MTEL
+		   	,A.MEMAIL 				MEMAIL
+		   	,A.MZONECODE 			MZONECODE
+		   	,A.MROADADDR 			MROADADDR
+		   	,A.MROADDETAIL 			MROADDETAIL
+		   	,A.MJIBUNADDR 			MJIBUNADDR
+		   	,A.MHOBBY 				MHOBBY
+		   	,A.MINFO 				MINFO
+		   	,A.MPHOTO 				MPHOTO
+		   	,A.DELETEYN 			DELETEYN		   	
+		    ,TO_CHAR(TO_DATE(A.INSERTDATE), 'YYYY-MM-DD') 	INSERTDATE 
+		    ,TO_CHAR(TO_DATE(A.UPDATEDATE), 'YYYY-MM-DD') 	UPDATEDATE	
+	FROM 	 SPRING_MEMBER A
+	WHERE 	 A.DELETEYN = 'Y' 	
+	AND      A.MNUM = #{mnum}
+</select>
+
+<select id="kosIdCheck" parameterType="kosmembervo" resultType="kosmembervo">	
+	
+	SELECT  
+       		A.MID	MID       	
+	FROM    SPRING_MEMBER A
+	WHERE   A.DELETEYN = 'Y'		
+	AND     A.MID = #{mid} 
+	
+</select>
+
+<update id="kosMemberUpdate" parameterType="kosmembervo" >
+
+	UPDATE SPRING_MEMBER
+   		SET  MHP 			= #{mhp}	
+	  		,MTEL 			= #{mtel}					
+	  		,MEMAIL 		= #{memail}				
+	  		,MZONECODE 		= #{mzonecode}			    
+	  		,MROADADDR 		= #{mroadaddr}				
+	  		,MROADDETAIL	= #{mroaddetail}		
+      		,MJIBUNADDR 	= #{mjibunaddr}			
+	  		,MHOBBY 		= #{mhobby}		
+	  		,MINFO  		= #{minfo}	
+	  		,UPDATEDATE 	= SYSDATE
+	WHERE    DELETEYN = 'Y'
+	AND      MNUM = #{mnum}
+</update>
+
+<update id="kosMemberDelete" parameterType="kosmembervo" >
+
+	UPDATE SPRING_MEMBER
+   		SET	 DELETEYN 	= 'N'
+      		,UPDATEDATE = SYSDATE
+	WHERE  	DELETEYN = 'Y'
+	AND    	MNUM = #{mnum}
+</update>
+</mapper>         	  

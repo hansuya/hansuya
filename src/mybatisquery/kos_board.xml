@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+          
+<mapper namespace="a.b.c.com.kos.board.dao.KosBoardDAO">
+
+<insert id="kosBoardInsert" parameterType="kosboardvo" >
+ 
+	INSERT INTO SPRING_BOARD (	BNUM, BSUBJECT, BNAME, 
+								BCONTENT, BFILE, BPW,
+								DELETEYN, INSERTDATE, UPDATEDATE)
+            			VALUES( #{bnum}, 
+            					#{bsubject}, 
+            					#{bname}, 
+            					#{bcontent}, 
+            					#{bfile}, 
+            					#{bpw},             					
+            					'Y', 
+            					SYSDATE, 
+            					SYSDATE)
+</insert>
+
+<select id="kosBoardSelectAll" parameterType="kosboardvo" resultType="kosboardvo">	
+	SELECT * FROM (
+		SELECT 	A.BNUM 		BNUM
+		       ,A.BSUBJECT 	BSUBJECT
+		       ,A.BNAME 	BNAME
+		       ,A.BCONTENT 	BCONTENT
+		       ,A.BFILE 	BFILE
+		       ,A.BPW 		BPW		   
+		       ,A.DELETEYN 	DELETEYN
+		       ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
+		       ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
+		       ,A.BHIT      BHIT	 	
+		       <!--  ? : 페이지 사이즈 : pageSize  -->
+		       ,CEIL(ROW_NUMBER() OVER(ORDER BY A.BNUM)/ #{pageSize} ) pageSize		
+			   ,COUNT(A.BNUM) OVER() AS totalCount 	      
+		FROM 	SPRING_BOARD A
+		WHERE 	A.DELETEYN = 'Y' 	
+		ORDER BY 1 DESC  
+	    <!--  ? : 현재 페이지 : curPage -->
+	) WHERE pageSize = #{curPage}
+		
+	
+</select>
+
+<select id="kosBoardSelect" parameterType="kosboardvo" resultType="kosboardvo">	
+	
+		SELECT 	A.BNUM 			BNUM
+		       ,A.BSUBJECT 		BSUBJECT
+		       ,A.BNAME 		BNAME
+		       ,A.BCONTENT 		BCONTENT
+		       ,A.BFILE 		BFILE
+		       ,A.BPW 			BPW		   
+		       ,A.DELETEYN 		DELETEYN
+		       ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
+		       ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
+		       ,A.BHIT      	BHIT 		      
+		FROM 	SPRING_BOARD A
+		WHERE 	A.DELETEYN = 'Y' 
+		AND     A.BNUM = #{bnum}	
+
+</select>
+
+<select id="kosBoardPwCheck" parameterType="kosboardvo" resultType="kosboardvo">	
+	
+		SELECT 	A.BNUM 		BNUM		    
+		       ,A.BPW 		BPW		   		     
+		FROM 	SPRING_BOARD A
+		WHERE 	A.DELETEYN = 'Y' 
+		AND     A.BNUM = #{bnum}	
+		AND     A.BPW = #{bpw}
+		
+</select>
+
+
+<update id="kobBoardBhit" parameterType="kosboardvo" >
+ 
+	UPDATE  SPRING_BOARD 
+		SET BHIT = (SELECT NVL(MAX(BHIT), 0) + 1 FROM SPRING_BOARD WHERE DELETEYN = 'Y' AND BNUM = #{bnum})
+		   ,UPDATEDATE = SYSDATE
+	WHERE   DELETEYN = 'Y'
+	AND     BNUM = #{bnum}		   
+</update>
+
+<update id="kosBoardUpdate" parameterType="kosboardvo" >
+
+	UPDATE  SPRING_BOARD
+   	   SET	BCONTENT    = #{bcontent}
+	  	   ,UPDATEDATE 	= SYSDATE
+	WHERE   DELETEYN = 'Y'
+	AND     BNUM = #{bnum}	
+</update>
+
+<update id="kosBoardDelete" parameterType="kosboardvo" >
+
+	UPDATE  SPRING_BOARD
+   	   SET	DELETEYN 	= 'N'
+      	   ,UPDATEDATE  = SYSDATE
+	WHERE  	DELETEYN    = 'Y'
+	AND    	BNUM = #{bnum}	
+</update>
+</mapper>      
