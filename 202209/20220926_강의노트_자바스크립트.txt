@@ -1,0 +1,142 @@
+2022-09-26
+----------------------------------
+
+자바스크립트 : 
+
+자바스크립트의 객체
+==============================================
+호스트 객체
+	브라우저 객체 : BOM : Browser Object Model 
+				Window, Navigator, History, Location, Screen, Document etc.
+				사용할 때는 
+				window, navigator, history, location, screen, document 
+
+	DOM 객체 : DOM : Document Object Model : DOM Tree 
+					HTML 요소를 조작하는 객체
+	
+	기타 객체 :
+		XMLHttpRequest(통신 객체) (Ajax)
+	   ,HTML5의 각종 API etc.
+
+네이티브 객체
+	내장생성자 객체
+		Object, String, Number, Boolean, Array, Date
+		Function, RegExp(정규식), Error, Symbol 등
+	
+	기타 객체
+		JSON, Math 등
+
+사용자 정의 객체
+	자바스크립트 코드를 실행한 결과로 생성된 객체 
+
+========================================================
+데이터 타입
+	
+	자바스크립트는 테이터 타입을 선언하지 않는 스크립트이다.
+	var i = 1;
+	var 변수에 i 변수명을 선언하면 
+	대입 되는 값 (리터럴, 객체)를 보고 
+	자바스크립트 엔진에서 데이터 타입을 식별한다. 
+
+
+	값 == 값 
+	== : 비교연산자 : 문자 하고 숫자 둘다 비교한다. 
+
+	원시타입 Primitive Type
+		숫자 : 정수, 실수
+		문자열 : "abc", 'ab', a b : 쿼테이션을 사용 않하면 null 구분자로 인식한다. 
+		논리값 : true, false
+		------------------------------------------------------------
+		undefined : 값이 없음
+					값을 아직 할당하지 않은 변수의 값
+					없는 객체의 프로퍼티를 읽으려고 시도했을 때의 값
+					없는 배열의 요소를 읽으려고 시도했을 때의 값
+					아무것도 반환하지 않는 함수가 반환하는 값
+					함수를 호출했을 때 전달받지 못한 인수의 값
+ 		------------------------------------------------------------
+		null : 아무것도 없음 
+
+	####################################
+	객체타입 Reference Type
+		$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		
+		객체
+			객체 리터럴로 객체 생성하기 
+			var card = {suit:"하트", rank:"A"};
+			var card1 = {"suit":"하트", "rank":"A"};
+			
+			객체 리터럴 : {....}
+			변수 card
+			프로퍼티 이름 : suit, "suit"
+			프로퍼티 값 : "하트", "A"
+		
+			---------------------------------------------
+			var card_json = '{suit:"하트", rank:"A"}';
+			var card_js = {suit:"하트", rank:"A"};
+			JSON.stringify(), JSON.parse() 
+			---------------------------------------------
+		$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		
+		배열
+			배열 리터럴로 생성
+			var evens = [2, 4, 6, 8];
+			var evens = new Array(2, 4, 6, 8);
+			var empty = new Array();
+		
+		$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+		
+		함수
+			함수 선언문으로 정의하는 법
+				function square(x) { return x*x; }
+
+			함수 리터럴로 정의하는 법
+				var square = function(x) { return x*x; }
+					// var square = function [square](x) { return x*x; }
+
+			Function 생성자로 정의하는 방법
+				var square = new Function("x", "return x*x");
+
+			화살표 함수 표현식으로 정의하는 방법
+				var square = x => x*x;
+		
+		$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+	####################################
+
+변수
+	var : 변수
+		
+		자바스크립트에서는 테이터 타입을 사용하지 않는다.
+		var 데이터 타입에 변수명을 선언하고 데이터 타입을 대입하면
+		자바스크립트 엔진이 알아서 데이터 타입을 맞추어서 생성해 준다. 
+		
+		var s = "abc"; 아 문자열 이구나 
+		
+		var i = 11; 아 숫자, 정수 구나 
+		
+		var f = {a:"a", b:"b"}; 리터럴 객체ㅋ구나 
+		
+		var a = new Array(1, 2, 3); 배열 객체구나 
+		
+		var fu = function(abc){ return abc;}: 함수 객체 구나 
+		
+		데이터 타입을 알고 싶으면 typeof() 함수를 사용하면 된다.
+
+	- let, const : ECMAScript 5, 6 에서 추가 된 것 
+	- 호이스팅, 클러저 개념을 공부해야 한다. 
+	
+	let : 지역변수
+	const : 상수
+=========================================================
+
+이벤트 처리방법
+	HTML 요소의 이벤트 처리기 속성에 설정하는 방법
+		<input type="button" onclick="changeColor();">
+	
+	DOM 요소 객체의 이벤트 처리기 프로퍼티에 설정하는 방법
+		vat btn = document.getElementById("button");
+		btn.onclick = changeColor();
+	
+	addEventListener 메서드를 사용하는 방법
+		vat btn = document.getElementById("button");
+		btn.addEventListener("click", changeColor, false);

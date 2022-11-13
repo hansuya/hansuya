@@ -1,0 +1,93 @@
+2022-08-30
+-----------------------------
+
+java.math.BigDecimal 
+	숫자를 다루는 클래스 
+	1. 숫자 초기화를 꼭 문자숫자로 해야 한다 : 형변환 : int 형으로 
+	2. 소수점 자리수 정할 때 : add(), substract(), multiply() 함수는 setScale()
+							divide() 디바이드 함수 매개변수로 해야 한다. 
+	3. 상수 사용법 : 상수 변수명, 리터럴 사용하기 
+
+java.util.Date
+	1. 이포크 시간 : 1970년 1월 1일 0시 0분
+	2. 년도 : +1900, 월 : (0 ~ 11) + 1
+	3. deprecated -> Calender.get(캘린터클래스.상수)
+	4. leap 사용가능 --> 윤년처리하는 컴포넌트 만들라고 
+java.util.Calendar
+	1. 추상클래스, 추상함수
+	2. getInstance() 
+java.util.TimeZone
+	1. 도시시간 메타데이타 읽을 수 있는 것 
+		Asia/Seoul
+java.text.SimpleDateFormate
+	2. Letter 문자상수 : yyyy MM dd HH mm ss
+
+java.lang.Integer
+	숫자 : 정수 
+
+프로그램에서 Data 자료형
+Java
+문자 : 문자열 : java.lang.String
+숫자 : 객체가 아니고 키워드 이다 : int <--> Integer
+날짜 : java.util.Date : efoke time
+
+
+java.lang.Class
+	forName(String className) throws ClassNotFoundException
+	className : 패키지명+클래스명 : NameSpace
+
+클래스(데이터)를 메모리에 올리는 방법, 자원을 사용하는 방법 .... etc.
+1. static
+2. new 
+3. inheritance : extends, implements 
+4. abstract class : getInstance()
+5. Class.forName(String className)
+
+
+
+공부한 패키지
+java.lang.*
+	Classes
+		Object
+		String
+		System
+		Integer
+		Class
+		Math
+	Exceptions
+		Exception
+		ArrayIndexOutofBoundException
+		AritMatricException
+		NullPointerException
+java.util.*
+	Interfaces
+		List
+		Map
+	Classes
+		ArrayList
+		HashMap
+		Iterator
+		Collections
+		Arrays
+		Date
+		Calendar
+		TimeZone
+		Scanner
+java.text.*
+	Classes
+		SimpleDateFormat
+java.math.*
+	Classes
+		BigDecimal
+java.io.*
+
+
+
+
+
+
+
+
+
+
+

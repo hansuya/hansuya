@@ -1,0 +1,11 @@
+2022-07-28 
+
+1. 처음 - 실수 - 익숙하지 않으니까 - 개발 - 디버깅
+2. 윈도우 10 64bit
+3. 윈도우 - 설정 - 정보 
+4.  win + E, win + R
+5.  cmd, cls, dir, . , .. , cd 
+6.  MS DOS, console 
+7. help : cls, dir, cd ...... set, path 
+8. jdk 다운로드 : oracle.com : 계정, O/S bit 
+9. jdk 1.8 api 즐겨찾기 

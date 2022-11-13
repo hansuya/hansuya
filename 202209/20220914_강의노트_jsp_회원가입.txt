@@ -1,0 +1,70 @@
+2022-09-14
+---------------------------
+
+9월 14일 오후 5시33분에 시작해서 
+9월 16일 오후 5시까지 완성하기 
+
+html - jsp - service - dao - db
+
+회원가입
+------
+
+회원번호 :
+아이디 :
+비밀번호 : 
+이름 : 
+성별 : 
+취미 : 
+핸드폰번호 : 
+생년월일 : 
+이메일 : 
+주소 : 
+
+
+회원번호 : mno
+아이디 : mid
+비밀번호 : mpw
+이름 : mname
+성별 : mgender 
+취미 : mhobby
+핸드폰번호 : mhp
+생년월일 : mbirth
+이메일 : memail
+도로명주소 우편번호: maddr
+도로명 주소 : maddr_1
+지번 주소 : maddr_3
+
+화면
+-------------------------
+/testWeb/kos_mem/
+member.html
+memberInsert.jsp
+
+비즈니스
+-------------------------
+a.b.c.com.common : 공통 패키지
+
+a.b.c.com.kos_mem
+
+서비스 
+a.b.c.com.kos_mem.service
+MemberService
+	public int memInsert(MemberVO mvo);
+MemberServiceImpl
+	public int memInsert(MemberVO mvo);
+
+다오 
+a.b.c.com.kos_mem.dao
+MemberDAO
+	public int memInsert(MemberVO mvo);
+MemberDAOImpl
+	public int memInsert(MemberVO mvo);
+
+쿼리
+a.b.c.com.kos_mem.sql
+MemberQuerySql
+	public String memInsertQuery(){};
+
+VO : DTO
+a.b.c.com.kos_mem.vo
+MemberVO

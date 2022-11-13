@@ -1,0 +1,98 @@
+2022-10-28
+-----------------------
+
+HTTP 프로토콜
+웹브라우저 <-- 요청 / 응답 --> 웹서버
+connectionless / stateless
+
+웹브라우저에서 jsp 를 사용할 때 
+	웹브라우저에서 .NET 를 사용할 때 
+	웹브라우저에서 php 를 사용할 때 
+
+jsp 에서 세션
+클라이언드에서 브라우저로 서버에 요청을 하면
+jsp 에서 요청된 것을 4가지의 객체로 scope 분류를 한다. 
+
+page		:	요청한 페이지 한장에서 만 사용하는 scope
+request		:	페이지에서 다른 페이지에 요청을 할 때 
+session		:	페이지에서 세션을 요청하면 그 Context 에서 사용 가능
+				세션 라이프 타임 까지 
+application :	페이지에서 application이 발생 되면 
+				그 Context 에서 어디서든 언제든지 사용 가능
+
+
+jsp & Servlet 에서 
+===================================================
+HttpSession 인터페이스를 이용해서 
+
+session 발생시키면 Jsp Session Repository 에
+
+session.setAttribute(key, value); 로 저장해서 
+session.getAttribute(key) 로 찾아서 사용한다. 
+
+session.setMaxInactiveInterval(60*60*9); 
+session.setMaxInactiveInterval(60*60*24);
+session.setMaxInactiveInterval(60*60*24*365);
+session.setMaxInactiveInterval(-1); // 세션의 시간을 무한대로 설정
+
+
+session.removeAttribute(key);
+session.invalidate(); // 세션 전체 제거, 무효화
+
+
+getSession(), getSession(true)
+	HttpSession이 존재하면 현재 HttpSession을 반환하고 
+	존재하지 않으면 새로 세션을 생성
+getSession(false)
+	HttpSession이 존재하면 현재 HttpSession을 반환하고 
+	존재하지 않으면 새로이 생성하지 않고 그냥 null을 반환
+
+HttpSession session = request.getSession();
+HttpSession session = request.getSession(true);
+새로 생성된 놈인지 확인은 session.isNew() 로 가능합니다
+
+getSession(), getSession(true)는 
+null 체크없이 바로 getAttribute()를 사용
+
+getSession(false) 
+null을 리턴할수 있기 때문에 null체크를 해야 합니다.
+
+HttpSession session = request.getSession(false);
+if (session != null) {
+	User user = (User) session.getAttribute("User");
+}
+
+===================================================
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+tomcat session
+---------------------------------------------
+탐캣 재시작시 세션 유지/제거 설정하기
+
+세션은 브라우저 단위로 생성되는 클라이언트 상태 유지 객체이다.
+세션은 사용자의 브라우저가 종료되거나,
+HttpSession.invalidate() 가 호출되었을 때 
+마지막으로 설정된 timeout에 의해 세션이 만료 되었을 때 
+제거 됩니다. 
+
+JSESSIONID 생성 클래스 
+org.apache.catalina.session.ManagerBase.createSession
+org.apache.catalina.util.StandardSessionIdGenerator
+
+
+org.apache.catalina.session.StandardManager 세션 매너저에서 세션관리
+탐캣이 종료 될 때 살아있는 세션을 임시저장소(디스크)
+SESSIONS.ser 파일에 저장, 재 시작할 대 이 파일을 읽어 세션을 다시 살리다. 
+SESSIONS.ser
+<Host> 또는 <Context> 의 workDir 속성으로 지정한 디렉토리
+$CATALINA_HOME/work
+
+세션저장 설정 비활성와 
+$CATALINA_HOME/conf/context.xml
+<!-- Uncomment this to disable session persistence across Tomcat restarts -->
+<!--
+<Manager pathname="" />
+-->
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$

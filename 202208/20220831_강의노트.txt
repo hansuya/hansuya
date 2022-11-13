@@ -1,0 +1,26 @@
+2022-08-31
+--------------------------------
+
+java.io.*
+	io : input / output
+
+stream : java.io.* in ========== out java.io.*
+			stream
+
+         -> buffer(8k) buffer(8k) buffer(8k) ->
+                  out ========== in
+		  1byte          1byte
+		  2byte          2byte
+                  buffer(바이트 담는 통) : 기본이 8k
+
+file : 파일이름 + 파일덩어리(binary)
+
+파일이름 C:\00.KOSMO120\10.JExam\el_java_work\testJava\src\a\b\c\ch9+파일이름
+
+/* 핸드폰 통신료 계산하는 프로그램 : 과금 프로그램 */
+/*
+# 주석 요령
+1. 지역변수 vs 멤버변수
+2. 기초자료형 vs 참조자료형
+3. 선언부(라인수), 참조부(라인수)
+*/

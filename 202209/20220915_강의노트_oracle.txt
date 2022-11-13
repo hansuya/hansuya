@@ -1,0 +1,45 @@
+2022-09-15
+---------------------------
+
+Oralce 데이터베이스 
+
+SID : orclHBE00
+비밀번호 : 1234
+
+sqlplus : 오라클 데이터베이스에서 제공하는 응용프로그램
+
+Account : 계정
+---------------------
+sys : 관리자 계정 : 1234
+system : 관리자 계정 : 운영 계정 : 1234
+
+scott : 연습용 계정 : tiger
+연습용 테이블
+EMP
+DEPT
+...
+
+#######################################################
+에러 메시지 
+the account is locked 
+--------------------------------
+
+C:\Users\kosmo>sqlplus "/as sysdba"
+
+SQL*Plus: Release 11.2.0.1.0 Production on 목 9월 15 18:20:16 2022
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+
+다음에 접속됨:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> alter user scott identified by tiger account unlock;
+
+사용자가 변경되었습니다.
+
+SQL> conn scott/tiger
+연결되었습니다.
+SQL>
+#######################################################

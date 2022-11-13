@@ -1,0 +1,66 @@
+2022-08-18
+---------------------------------------------------------------
+자바에서 Resource를 사용하는 방법
+
+1. static 키워드			: 클래스로 사용
+
+2. new 연산자(키워드)	: 참조변수로 사용
+
+3. 상속 inheritance		: 클래스, 참조변수 없이 사용
+
+		extends 키워드			 : class 클래스 상속시 사용 
+											단일 상속 Single inheritance
+		impliments 키워드		 : interface 클래스 상속시 사용
+											다중 상속 multiful inheritance
+
+
+2022-08-19
+---------------------------------------------------------------
+자바에서 Resource를 사용하는 방법
+
+1. static 키워드			: 클래스로 사용
+
+2. new 연산자(키워드)	: 참조변수로 사용
+
+3. 상속 inheritance		: 클래스, 참조변수 없이 사용
+
+		extends 키워드			 : class 클래스 상속시 사용 
+											단일 상속 Single inheritance
+		impliments 키워드		 : interface 클래스 상속시 사용
+											다중 상속 multiful inheritance
+4. public abstract class : 추상 클래스 new 연산자를 사용하지 못함
+	getInstance() 함수 사용
+	ex) java.util.Calendar
+		Calendar rightNow = Calendar.getInstance();
+
+2022-08-19
+---------------------------------------------------------------
+클래스 종류
+1. 일반 클래스 : public class 클래스 이름
+2. 추상 클래스 : public abstract class 클래스 이름
+3. 인터페이스 클래스 : public interface 인터페이스클래스 이름
+4. 파이널 클래스 : public final class 클래스이름
+
+2022-08-29
+---------------------------------------------------------------
+자바에서 Resource를 사용하는 방법
+
+1. static 키워드			: 클래스로 사용
+
+2. new 연산자(키워드)	: 참조변수로 사용
+
+3. 상속 inheritance		: 클래스, 참조변수 없이 사용
+
+		extends 키워드			 : class 클래스 상속시 사용 
+											단일 상속 Single inheritance
+		impliments 키워드		 : interface 클래스 상속시 사용
+											다중 상속 multiful inheritance
+4. public abstract class : 추상 클래스 new 연산자를 사용하지 못함
+	getInstance() 함수 사용
+	ex) java.util.Calendar
+		Calendar rightNow = Calendar.getInstance();
+5. Class.forName("패키지명.클래스이름")
+		클래스이름 참조변수 = (클래스이름).ca.newInstance();
+	예)Class.forName(String className)
+			Class ca = Class.forName("a.b.c.ch8.Test_Class");
+			클래스이름 참조변수 = (클래스이름).ca.newInstance();

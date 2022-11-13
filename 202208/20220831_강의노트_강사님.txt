@@ -1,0 +1,18 @@
+2022-08-31
+---------------------------
+
+java.io.*
+	io : input / output
+
+stream : java.io.*  in  --------------------- out java.io.*
+						stream
+
+					buffer(8k) buffer(8k) buffer(8k)
+					out ---------------------- in 
+					1byte          1byte
+					2byte          2byte
+					buffer(바이트 담는 통) : 기본 8k
+
+file :  파일이름 + 파일덩어리(binary)
+파일이름 : C:\00.KOSMO120\10.JExam\el_java_work\testJava\src\a\b\c\ch9 + 파일이름
+

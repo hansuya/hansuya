@@ -1,0 +1,86 @@
+2022-09-08
+--------------------------
+
+JSP : Java Server Page : 페이지를 이동하는 기술
+	자바로 언어로 웹 서비스를 할 때 사용하는 "Server Side Script" 스크립트 언어이다. 
+	jsp 는 서버 사이드 스크립트인 Servlet 으로 변환되서 실행 된다.
+
+	ServletRequest
+		HttpServletRequest
+			HttpServletRequestWrapper
+	ServletResponse
+		HttpServletResponse
+			HttpServletResponseWrapper
+
+	유사한 언어로 
+	MS 에 .NET(c#) (닷넷, 시샵), PHP  ... etc.
+
+	linux + php + mysql : 전 세계에서 1등 : 웹페이지 만들 때
+
+
+
+login.jsp 파일 변환 과정
+--------------------------------
+1. 웹 브라우저에서 해당 URL 를 이용해서 login.jsp 를 요청하면
+	http://localhost:8088/testWeb/kos_jsp/login.jsp 
+
+2. 하기의 물리적인 위치에 있는 login.jsp 파일이
+	C:\00.KOSMO120\30.web\el_web_work\testWeb\WebContent\kos_jsp\login.jsp
+
+3.	이클립스이 퍼블리싱 위치인 하기 폴더에 
+	jasper.jar 엔진이 
+	login_jsp.java 서블릿 자바 코드로 변환하고 
+	변환된 login_jsp.java 서블릿 코드를 login_jsp.class 로 변환한다.
+	C:\00.KOSMO120\30.web\el_web_work\.metadata\.plugins\org.eclipse.wst.server.core
+		\tmp0\work\Catalina\localhost
+		\testWeb\org\apache\jsp\kos_005fjsp\login_jsp.java, login_jsp.class
+
+==================================================
+jsp 파일을 요청하면 jasper 엔진이 
+해당 jsp 파일을 servlet 자바 화일로 변환하고 
+해당 servlet 자바 화일을  class 로 컴파일해서 
+클래스 화일로 서비스 한다.
+==================================================
+
+
+
+자바스크립트 리소스 보기 
+---------------------------------------------
+이클립스 4.16(2020-06) 버전
+프로젝트에 JavaScript Resources 보이기 하기
+
+Helf - Install New Software....
+	http://download.eclipse.org/releases/photon
+
+Web, XML, Java EE ....
+	Javascript DevelopmentTools .. 선택 하기 
+
+
+자바스크립트 
+================
+https://www.ecma-international.org/publications-and-standards/standards/
+
+ECMA-262
+https://www.ecma-international.org/publications-and-standards/standards/ecma-262/
+
+
+
+회원 가입하기 
+----------------------
+회원번호 : 형식 : text
+아이디 : 아이디 길이 : text 
+비밀번호 : 비밀번호 자리수 : text --> password
+이름 : 한글 길이 : text
+핸드폰번호 : 입력형태 : text text text or select box text text
+생년월일 : 년월일 박스 : text text text or select box select box select box, test select box select box
+이메일 : 도메인 선택, key-in
+주소 : 도로명 주소, 지번 주소 
+
+회원번호 : mno
+아이디 : mid
+비밀번호 : mpw
+이름 : mname
+핸드폰번호 : mhp
+생년월일 : mbirth
+이메일 : memail
+주소 : maddr

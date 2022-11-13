@@ -1,0 +1,27 @@
+2022-08-29
+-----------------------------
+
+java.lang.String
+	public int indexOf(int ch)
+	public indexOf(String str)
+	public lastIndexOf(int ch)
+	public lastIndexOf(String str)
+	substring(int beginIndex)
+	substring(int beginIndex, int endIndex)
+
+java.lang.Math
+	public static double random()
+	greater than or equal to 0.0 and less than 1.0
+
+
+---------------------------------
+
+자바
+										Object
+										All Object
+										int --> Integer.MAX_VALUE
+												Integer.MIN_VALUE
+자바소스.java ----------> 자바클래스.class <-----------------> CPU
+			javac.exe					java.exe
+			자바 컴파일러					자바버철머신(JVM)
+

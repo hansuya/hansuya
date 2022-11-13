@@ -1,0 +1,30 @@
+2022-09-07
+-------------------------
+
+jdk 에 jsp, Servlet 리소스를 참조하기 위해서 api 복사 하기 
+------------------------------------------------------
+C:\Program Files\Apache Software Foundation\Tomcat 8.5\lib
+jsp-api.jar
+servlet-api.jar
+복사 해서 
+C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext
+jsp-api.jar
+servlet-api.jar
+카피하기 
+
+
+
+GET 방식일 때 
+server.xml 에서 URIEncoding="UTF-8" 으로 한글 인코딩 하기 
+---------------------------------------------------
+Eclipse - Project Explorer
+Servers - Tomcat v8.5 Server at localhost-config
+server.xml 
+
+line 63 
+<Connector	connectionTimeout="20000" 
+			port="8088" 
+			protocol="HTTP/1.1" 
+			redirectPort="8443"
+			URIEncoding="UTF-8"/>
+서버 리스타트 하기

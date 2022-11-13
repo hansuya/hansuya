@@ -1,0 +1,248 @@
+2022-09-28
+-------------------------------
+
+jQuery 
+---------------------------------------------------
+1.	javaScript 동일하다.
+
+2.	javaScript 는 브라우저에 엔진이 포함되어 있어서 브라우저에 종속 되어 있다. 
+	브라우저( 또는 같은 브라우저라도 버전이 다르면)마다 
+	자바스크립트 엔진이 달라서 기능이 상이하게 동잘 할 수 있다. 
+
+3.	브라우저에 비종속 개념으로 javaScript를 함수 화 한 것이 jQuery 이다. 
+
+4.	jQuery 는 vender 만든 외부 라이브러리 를 사용한다. : CDN 
+	vender : jquery.com, google.com, oralce.com, daum.net, 카카오 .. etc. 
+
+	Google CDN
+		https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js
+	Microsoft CDN
+		https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.js
+
+5.	jQuery 버전이 현재 
+	jQuery 3.x
+	jQuery 2.x
+	jQuery 1.x
+	
+	jQuery 버전별로 브라우저를 지원하는 것이 달라서 
+	브라우저에 따라 jQuery 버전을 잘 선택해야 한다. 
+
+6.	javaScript --> jQuery --> ECMAScript 5, 6 을 사용하세요 ... 
+
+7.	uncompressed : 원본 파일 (확장자 : .js)
+	minified : 원본을 압축한 파일 (확장자 : .min.js)
+	jQuery 3.x 버전 부터 지원
+		slim : 해당 버전에서 필요없다고 생각하는 라이브러리를 제거한 파일 (.slim.js)
+		slim minified : slim 파일을 압축한 파일(.slim.min.js)
+	
+	uncompressed
+	<script
+		src="https://code.jquery.com/jquery-1.12.4.js"
+		integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+		crossorigin="anonymous">
+	</script>
+
+	compressed
+	<script
+		src="https://code.jquery.com/jquery-1.12.4.min.js"
+		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+		crossorigin="anonymous">
+	</script>
+
+
+보안을 위해서 
+intergrity	:	URL을 SHA256 방식으로 해시한 값
+			:	해시값 비교해서 값이 다르면 해당 스크립트를 실행하지 않음
+				subdomain 
+crossorigin :	CORS(Cross Origin Resource Sharing 교차 출처 자원 공유) 사용 
+			:	요청을 받은 웹서버가 허용할 경우에는 
+				다른 도메인의 웹 페이지 스크립트에서도 자원을 주고받을 수 있게 해줌
+
+하위버전 마이그레이션
+----------------------------------
+jQuery 1.12.x or jQuery 2.2.x이상 버전을 사용중이고 
+jQuery 3.x 이상으로 Upgrade 하는 경우
+<script src="https://code.jquery.com/jquery-migrate-3.3.2.js"></script>
+
+jQuery 1.9이하 버전 사용중
+jQuery 1.12.x or jQuery 2.2.x로 먼저 Upgrade 필요할 경우
+<script src="https://code.jquery.com/jquery-migrate-1.4.1.js"></script>
+
+
+8. jQuery 다운로드 
+	https://jquery.com/download/ 페이지 맨 밑에 
+	Past Releases
+	All past releases can be found on the jQuery CDN.
+	이용하기 
+
+9. jQuery 는 함수로 구성 되어있다. 
+   함수를 사용하는데 함수를 여러개 사용할 때는 . (링크 연산자)를 이용해서 
+   chain 형태로 사용한다.
+   (Method Chaining : 다른 함수를 지속적으로 호출하는 릴레이 방식의 프로그래밍 패턴). 
+   함수().함수().함수();
+    
+
+jQuery 선택자(Selector) 
+--------------------------
+
+$(selector) or jQuery(selector) 
+: jQuery()보다 표현상 간단한 $()를 더 많이 사용.
+
+
+선택자 사용하기 
+---------------------
+문서 객체 모델(DOM, Document Object Model)은 HTML 문서 객체 구조이다.
+문서 객체 모델에서는 태그 tag를 객체 Obejct, 노드 Node 라고 부른다.
+노드의 종류 
+태그	요소 노드		Element Node
+내용	텍스트 노드	Text Node
+속성	속성 노드		Attribute Node
+
+
+1.	제이쿼리가 먼저 실행되고 
+	그 다음 <body> 영역에 문서 객체를 불러온다.
+	선택자를 선택할 수 없다.
+---------------------------------------
+<head>
+	<script>
+		$("#아이디명").css("color", "red");
+	</script>
+</head>
+
+<body>
+	<p id="아이디명">내용</p>
+</body>
+
+
+2.	<body> 영역에 문서 객체를 먼저 불러온 다음 
+	선택자를 사용할 수 있도록 해야 한다.
+---------------------------------------
+<head>
+	<script>
+		$(document).ready(function(){
+			$("#아이디명").css("color", "red");
+		});	
+	</script>
+</head>
+<body>
+	<p id="아이디명">내용</p>
+</body>
+
+<head>
+	<script>
+		$(function(){
+			$("#아이디명").css("color", "red");
+		});	
+	</script>
+</head>
+<body>
+	<p id="아이디명">내용</p>
+</body>
+
+
+제이쿼리 선택자로 스타일, 속성을 적용하는 기본형
+-----------------------------------------
+1. 선택한 요소에 지정한 스타일 style 을 적용
+	$("CSS 선택자").css("스타일 속성명", "값");
+2. 선택한 요소에 지정한 속성 attribute 을 적용
+	$("CSS 선택자").attr("속성명", "값");
+	$("CSS 선택자").attr({"속성명1":"값1", "속성명2":"값2"});
+
+
+선택자
+-----------
+
+기본 선택자
+$(*)	
+$("#아이디명")
+$(".클래스명")
+$("요소명")
+$("선택1, 선택2 ... 선택n")
+$("요소.클래스명")
+$("요소#아이티명")
+
+
+CSS Selector
+---------------------------------------------
+$(this) : 자기 자신을 나타냄.
+
+$("*") : All Selector  ; 모든 엘리먼트 선택
+
+$("#id") : ID Selector : 유니크 하개 엘리먼트 하나만 적용 
+
+$(".class name") : Class Selector : 엘리먼트 여러개 할 때 
+
+$("element name") : Element Selector, 특정 요소 모두 가져오기
+	ex) $('div') : 문서안의 모든 div엘리먼트를 선택
+
+	$("element#id") : 특정 엘리먼트 중 해당 id 를 가진 엘리먼트 선택
+	$("element.class") : 특정 엘리먼트 중에 클래스명이 class 인 엘리먼트를 선택
+
+// 엘리먼트는 계층구조를 가지고 있으며 배열 구조로 되어있다.
+// 엘리먼트는 부모, 자식, 형제 관계를 가지고 있다. 
+// 자기자신 엘리먼트를 중심으로 부모, 형제, 자식 관계를 갔는다. 
+$("s1, s2, s3, ..") : Multiple Selector, 다중 선택자 : 다중 요소를 가져올때는 콤마(,) 사용 구분
+
+
+$(":input") : 입력(Input)요소 가져오기 ; 모든 입력 관련되 요소에 대한 선택 기능.
+
+$(":contains()")  :  특정 요소의 내용에 포함된 요소 가져오기 
+	//myContainer 단어가 포함된 div요소들 가져오기, 대소문자 구분.
+	ex) $('div:contains("myContainer")');  
+
+$(":even) 짝수번째 요소 가져오기
+	//인덱스 시작은 0부터 ; 짝수번째 글자색을 그린으로.
+	ex) $('ul li:even').css("color","green"); 
+
+$(":odd") 홀수번째 요소 가져오기
+	//인덱스 시작은 0부터 ; 홀수번째 글자색을 블루로.
+	ex) $('ul li:odd').css("color","blue"); 
+
+$("요소:first-child") : 특정요소의 첫번째 자식 요소 반환
+$("요소:last-child") : 특정요소의 마지막 자식 요소 반환
+$("요소:only-child") : 특정요소를 기준으로 자식요소가 딱 하나인 요소
+$("요소:nth-child(n)") : 부모 요소를 기준으로 n번째 위치한 요소
+$("요소:empty") : 부모 요소를 기준으로 자식을 갖지 않는 요소.
+$("요소:not(Selector)") : 다른 선택자를 제외한 요소
+
+
+CSS 스타일 우선순위 : CAS Style Precedence
+-------------------------------------------------
+CSS의 C는 캐스캐이딩(Cascading)의 약자로 '위에서 아래로 흐르는 스타일 시트'라는 뜻이다.
+CSS는 중복선언을 허용한다. 
+
+중복되는 속성이 있을경우 아래와 같은 우선순위로 처리된다.
+
+1. 속성값 뒤에 !important 를 붙인 속성 
+
+2. HTML에서 style을 직접 지정한 속성 : 태그에 inline으로 style 속성 지정  : 1000점
+	
+	<div style="background-color: green" id="id-style" class="class-style">  
+
+3. #id 로 지정한 속성  : 100점
+	
+	#id-style-2 {
+			background-color: skyblue;
+			margin: 50px;
+			padding: 50px;
+		}
+	<div id="id-style-2">
+
+4. .class 및 pseude(추상) 클래스(:hover 같은 것)로 지정한 속성 : 10점
+	
+	.ul-class {
+				background-color: salmon;
+				color: mediumpurple;
+			}
+	<ul class="ul-class">
+
+5. 요소이름으로 지정한 속성 : 1점 
+
+	ul {
+			color: black;
+		}
+	<ul></ul>
+
+6. 상속된 속성
+
+단: 같은 우선순위에 있는 경우, 나중에 선언된 것이 우선 적용된다. 

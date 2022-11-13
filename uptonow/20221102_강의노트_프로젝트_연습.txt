@@ -1,0 +1,216 @@
+2022-11-02
+------------------------------
+
+개인별[김한수] 미니 프로젝트
+--------------------------------
+
+
+개발 환경
+-------------
+0.	Dynamic Web Project 빌드 프레임워크 
+	컨텍스트 
+		xxxSpring : khsSpring
+	워크스페이스 
+		el_khs
+		el_khs_work
+
+1.	jdk
+		jdk 1.8u202
+
+2.	was 
+		Apache Tomcat Version 8.5.82
+			Servlet spec 3.1
+			Jsp spec 2.3
+			el spec 3.0
+			web socket 1.1
+
+3.	ide 
+		eclipse202006
+
+		언어 세팅하기 UTF-8 로 세팅하기 
+			Window - Preferences
+				General 
+					Content Types 
+						Text 
+							Default encoding : utf-8  Update
+					Editors
+						Text Editors
+							Spelling
+								Encoding Other UTF-8 Apply
+					Workspace
+						Text file encoding
+								Other UTF-8 Apply
+				Web
+					CSS Files
+						Endocing: ISO  10646/Unicode(UTF-8) Apply
+					HTML Files
+						Endocing: ISO  10646/Unicode(UTF-8) Apply
+					JSP Files
+						Endocing: ISO  10646/Unicode(UTF-8) Apply
+
+4.	spring
+		libarary : 4.3.16
+		sts 플러그인 : Spring Tool 3 : 3.9.14.RELEASE
+
+5.	mybatis
+		libarary : 3.2.4
+		spring-mybatis : 1.2.2
+
+6.	library
+		###########################
+			스프링 프레임웍에서 el ${} 에 에러가 발생되면
+			tomcat lib  에 있는 el-api.jar,jasper-el.jar 를 
+			스프링 프레임워크에 포팅한다.
+
+			el-api.jar : 표현언어 : Tomcat EL : tomcat 에 있는 라이브러리 
+			jasper-el.jar
+			spring-expression-4.3.16.RELEASE.jar : 스프링 표현언어 : Spring EL
+		###########################
+		
+		commons-logging-1.1.2.jar : 스프링 로그 라이브러리
+		cos.jar : 파일업로드 라이브러리
+		jstl.jar : jstl 라이브러리 
+		standard.jar 
+		ojdbc6.jar : Oralcle 11g 2 Release jdbc 드라이버
+		mybatis-3.2.4.jar : 마이바티스 라이브러리 
+		mybatis-spring-1.2.2.jar : 마이바티스 스프링 연동 라이브러리 
+		spring-aop-4.3.16.RELEASE.jar : 스프링 모듈화 ?
+		spring-beans-4.3.16.RELEASE.jar : Bean 라이프 사이클	
+		spring-context-4.3.16.RELEASE.jar : 컴포넌트 경로 
+		spring-context-support-4.3.16.RELEASE.jar	
+		spring-core-4.3.16.RELEASE.jar : IoC, DI
+		spring-expression-4.3.16.RELEASE.jar : 스프링 el 
+		spring-tx-4.3.16.RELEASE.jar : 데이터베이스 트랜잭션	
+		spring-jdbc-4.3.16.RELEASE.jar : 
+		spring-web-4.3.16.RELEASE.jar : Web 
+		spring-webmvc-4.3.16.RELEASE.jar : Web MVC : Model View Controller
+		spring-websocket-4.3.16.RELEASE.jar : 소켓
+
+환경설정 파일 세팅하기 
+######################################
+7.	context.xml : 이클립스에 모든 컨텍스트에 적용되는 환경설정 파일 
+		이클립스 : 워크스페이스에 컨텍스트 가 여러개 있어도 무방하다. 
+		인텔리제이 : 워크스페이스에 컨텍스트 가 하나만 있어야 한다. 
+	Servers/Tomcat v8.5 Server at localhost-config/context.xml
+
+	server.xml : port="8088", URIEncoding="UTF-8"(GET), Context path="/khsSpring"
+	web.xml : session timeout = 30분, MIME type 설정 
+
+	context.xml 에서는 
+		Resource 엘리먼트에 데이터소스 정보를 설정해 놓으면
+		spring-servlet.xml 마이바티스 환경설정 파일에서 
+		java:comp/env jndi 환경설정 메타 데이터로 데이터소스 연결정보를 연결한다.
+		이후에는 스프링 마바이티스 프레임워크에서 디비 연결을 관장한다.
+
+8.	/WEB-INF/web.xml : khsSpring 컨텍스트의 환경설정 파일 이다. 		
+		
+		DispatcherServlet
+		spring-servlet.xml 파일 연결
+		url-pattern : *.khs
+		인코딩 세팅 : POST
+		log4j 위치 세팅
+
+9.	/WEB-INF/spring-servlet.xml : 스프링 웹 MVC 환경설정 파일이다. 
+		
+		1) 스프링 웹 MVC 컨피규레이션
+		2) Component 스캔
+		3) View Resolving 
+
+10.	/WEB-INF/serlvet-context.xml : 마이바티스 환경설정 파일 
+		1) 데이터 소스 찾기 
+		2) mapper.xml 찾기 : 쿼리문 찾기
+		3) 트랜잭션 처리 
+		4) mapper, dao 인터페이스 찾기 
+
+
+11. 테이블 
+
+
+1. 회윈
+-------------------------------------
+
+테이블이름 : SPRING_MEMBER
+
+mnum 회원번호 : 20자 : MYYYYMMDD0001: M 구분코드 YYYY 년 MM 월 DD 일 0001
+mname  이름 : 한글이름 및 영문한글 이름 포함
+mid : 아이디 :  영문숫자 8자리  
+mpw 비밀번호 : 8자리
+mgender 성별 : 여성 : F, 남성 : M (F,M <-- 코드 값)
+mbirth 생년월일 : 년도 : TEXT, 월 : 셀렉트박스, 일 : 셀렉트 박스, YYYY-MM-DD
+mhp 핸드폰 : 국번 : 셀렉트박스, 번호 : 텍스트, XXX-XXXX-XXXX
+mtel 유선전화번호 : 국번 : 셀렉트, 번호 : 텍스트, 
+memail 이메일 : 직접입력, 선택입력 
+mzonecode 도로명주소 우편번호 : 5자리, 도로명주소 전에는 우편번호 6자리 : 다음 Open API 사용하기 
+mroadaddress 도로명주소
+mroadaddressdetail 도로명주소 상세주소 : 키인 : KEY-IN 
+mgibunaddress 지번주소 : 
+mhobby 취미 : 체크박스 5개 하기 :  본인이 하고 싶은 것 
+minfo 자기소개 : 300 바이트 
+mphoto  사진 : 사진 파일명 : 데이터베이스에, 물리적인 사진 파일은 서버 폴더에 저장하기 
+
+deleteyn
+insertdate
+updatedate
+	
+	
+DROP TABLE SPRING_MEMBER;
+CREATE TABLE SPRING_MEMBER(
+	 MNUM 				VARCHAR2(20) PRIMARY KEY 
+	,MNAME 				VARCHAR2(200)
+	,MID 				VARCHAR2(300) NOT NULL
+	,MPW 				VARCHAR2(300) NOT NULL
+	,MGENDER 			VARCHAR2(1) -- F : 여성, M : 남성
+	,MBIRTH 			VARCHAR2(10)
+	,MHP 				VARCHAR2(16) NOT NULL
+	,MTEL 				VARCHAR2(16) 
+	,MEMAIL 			VARCHAR2(300) NOT NULL
+	,MZONECODE 		    VARCHAR2(5)
+	,MROADADDRESS 		VARCHAR2(500)
+	,MROADADDRESSDETAIL VARCHAR2(500)
+	,MGIBUNADDRESS 		VARCHAR2(500)
+	,MHOBBY 			VARCHAR2(100)
+	,MINFO  			VARCHAR2(300)
+	,MPHOTO	 			VARCHAR2(300)
+	,DELETEYN 			VARCHAR2(1) NOT NULL
+	,INSERTDATE 		DATE
+	,UPDATEDATE 		DATE	
+);	
+
+2. 게시판
+-------------------------------------
+
+테이블 SPRING_BOARD
+
+글번호 sbnum 
+제목 sbsubject
+작성자  sbname
+내용 sbcontent
+파일 sbfile
+비밀번호 sbpw
+삭제여부 sbdelyn	
+등록일 sbinsertdate
+삭제일 sbupdatedate
+
+CREATE TABLE SPRING_BOARD(
+	SBNUM VARCHAR2(20) PRIMARY KEY 
+   ,SBSUBJECT VARCHAR2(200) NOT NULL
+   ,SBNAME VARCHAR2(100) NOT NULL
+   ,SBCONTENT VARCHAR2(2000)
+   ,SBFILE VARCHAR2(300)
+   ,SBPW VARCHAR2(300)
+   ,SBDELYN VARCHAR2(1) NOT NULL
+   ,SBINSERTDATE DATE
+   ,SBUPDATEDATE DATE 
+);
+
+
+12. 클래스 설계
+
+패키지
+a.b.c.com.chs.mem.*
+a.b.c.com.chs.mem.controller.ChsMemberController
+
+a.b.c.com.chs.board.*
+a.b.c.com.chs.common.*
+
+13. 테이블 설계서 만들기 (엑셀)

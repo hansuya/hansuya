@@ -1,0 +1,111 @@
+2022-09-02
+----------------------
+
+1. 프로토콜 : 통신규약
+	IP TCP HTTP
+
+2. 웹브라우저 :	웹서버와 HTTP 프로토콜을 이용해서 Request(요청), Response(응답) 하는 프포그램
+				웹서버와 통신하는 프로그램				
+	응용프로그램
+	크롬, 엣지, 사라피, 오페라, 파이어폭스
+	HTTP 프로토콜을 사용해서 
+	웹 서버에게 데이터를 요청하고 
+	웹 서버에서 응답하는 테이터를 받아서 
+	웹 브라우저 화면에 보여주는 것
+
+3. 웹서버 : http 프로토콜을 사용해서 클라이언트 사이트 스크립트를 응답하는 프로그램 및 컴퓨터 
+			Client Side Script : HTML, CSS, JavaScript 
+		웹 브라우저 클라언트에서 HTTP 프로토콜의 요청을 받고
+		HTML 문서로 만들어진 웹 페이지를 
+		웹 브라우저 클라이언트에게 전달(응답)하는 컴퓨터(응용 프로그램)
+
+4. 포트
+	네트워크를 통해서 어플리케이션에 들어올 수 있는 통로이다. 
+	하나의 컴퓨터에서 포트는 유니크 해야 한다. 
+	
+5. 방화벽
+	못들어오게 하는 것
+
+6. 프록시
+	들어오게 도와 주는 것 
+
+7. 아이피
+	컴퓨터 주소 
+
+8. 네트워크계층
+	L3 IP 라우팅 
+
+9. 트랜스포트계층
+	L4 TCP 전송계층
+
+10. 세션계층
+	 L5 PORT
+
+
+http://192.168.219.122:8088/testWeb/html/hello.html
+http://localhost:8088/testWeb/html/hello.html
+http://127.0.0.1:8088/testWeb/html/hello.html
+http://DESKTOP-8AE4S89:8088/testWeb/html/hello.html
+
+C:\00.KOSMO120\30.web\el_web_work\testWeb
+C:\00.KOSMO120\30.web\el_web_work\testWeb\WebContent\html\hello.html
+
+
+server.xml : 아파치 탐캣 환경 설정 파일 이라고 부른다.
+63 라인
+<Connector	connectionTimeout="20000" 
+			port="8088" 
+			protocol="HTTP/1.1" 
+			redirectPort="8443"/>
+
+155 라인
+<Context	docBase="testWeb" 
+			path="/testWeb" 
+			reloadable="true" 
+			source="org.eclipse.jst.jee.server:testWeb"/></Host>
+
+변경하기 : 확장자가 xml 화일의 내용을 변경하면 무조건 껐다켜야한다.
+<Context	docBase="testWeb" 
+			path="/" 
+			reloadable="true" 
+			source="org.eclipse.jst.jee.server:testWeb"/></Host>
+
+
+http://localhost:8088/testWeb/html/hello.html
+
+http://localhost:8088/html/hello.html
+
+
+<Context	docBase="testWeb" 
+			path="/aa" 
+			reloadable="true" 
+			source="org.eclipse.jst.jee.server:testWeb"/></Host>
+
+http://localhost:8088/aa/html/hello.html
+
+
+
+
+
+
+C:\00.KOSMO120\30.web\el_web_work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\testWeb\html\hello.html
+
+이클립스 작업 파일들에 대해 실제 tomcat이 확인하는 루트
+Context 
+C:\00.KOSMO120\30.web\el_web_work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\testWeb
+==================================
+이클립스에서 아파치 탐켓 파일을 읽는 실제 위치
+==================================
+"WebContent" 가 없다
+C:\00.KOSMO120\30.web\el_web_work\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\testWeb\html
+
+파일 실행시
+Run On Server = Next -
+Add and Remove
+	Available Configured 에 따라서 생성되기도 하고 삭제 되기도 한다
+	===================================
+C:\00.KOSMO120\30.web\el_web_work\.metadata\.plugins\org.eclipse.wst.server.core\
+
+tmp0\wtpwebapps\testWeb\html
+tmp1
+tmp2 와같이 생겼다 지워졌다한다
